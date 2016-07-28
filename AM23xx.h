@@ -1,16 +1,22 @@
 //
-// AM23xx - an Arduino library for aosong humidity and temperature sensors.
+// AM23xx - an Arduino library for Aosong humidity and temperature sensors.
 //
 //
-#include "Wire.h"
+
+#define AM23XX_SUCCESS       1
+#define AM23XX_FAIL          0
+#define AM23XX_BAD_CHECKSUM -1
+
 
 class AM23xx
 {
     public:
-	    AM23xx();
-        int read();
-        int temperature;
-        int humidity;
+	    AM23xx() {};
+        int8_t read();
+        double humidity;
+        double temperature;
+
 	private:
-        int isCorrect();
+		uint8_t measurements[5];
+        bool isCorrect();
 };
